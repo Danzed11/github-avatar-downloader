@@ -1,6 +1,11 @@
 var request = require('request');
 var secret = require('./secret.js')
 var fs = require('fs')
+var argv1 = process.argv[2];
+var argv2 = process.argv[3];
+  if (!argv1)
+    console.log("No input received");
+    process.exit();
 console.log('Welcome to Github Avatar Downloader!');
 
 function getRepoContributors(repoOwner, repoName, cb) { //Request for JSON, returning array of contribs
@@ -23,7 +28,7 @@ function getRepoContributors(repoOwner, repoName, cb) { //Request for JSON, retu
      });
    };
 
-   getRepoContributors("jquery", "jquery", function(err, result) {
+   getRepoContributors(argv1, argv2, function(err, result) {
         console.log("Errors:", err);
         console.log("Result:", result);
 
@@ -39,4 +44,6 @@ function getRepoContributors(repoOwner, repoName, cb) { //Request for JSON, retu
 
    })
    .pipe(fs.createWriteStream(filePath));
+}
+
 }
