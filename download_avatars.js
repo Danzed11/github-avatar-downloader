@@ -1,6 +1,12 @@
 var request = require('request');
 var secret = require('./secret.js')
 var fs = require('fs')
+var argv1 = process.argv[2];
+var argv2 = process.argv[3];
+  if(!argv1) {
+    console.log("No input received");
+    process.exit();
+  }
 console.log('Welcome to Github Avatar Downloader!');
 
 function getRepoContributors(repoOwner, repoName, cb) {
@@ -23,7 +29,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
      });
    };
 
-   getRepoContributors("jquery", "jquery", function(err, result) {
+   getRepoContributors(argv1, argv2, function(err, result) {
         console.log("Errors:", err);
         console.log("Result:", result);
 
